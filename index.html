@@ -466,16 +466,18 @@
 
         // ===== CONTACT FORM =====
         const contactForm = document.getElementById('contactForm');
-        contactForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const name = document.getElementById('name').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const message = document.getElementById('message').value.trim();
-            if (!name || !email || !message) { alert('Please fill in all fields.'); return; }
-            if (!email.includes('@') || !email.includes('.')) { alert('Please enter a valid email address.'); return; }
-            alert(`Thank you, ${name}! Your message has been sent. We'll get back to you within 24 hours. ✨`);
-            contactForm.reset();
-        });
+        if (contactForm) {
+            contactForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const name = document.getElementById('name').value.trim();
+                const email = document.getElementById('email').value.trim();
+                const message = document.getElementById('message').value.trim();
+                if (!name || !email || !message) { alert('Please fill in all fields.'); return; }
+                if (!email.includes('@') || !email.includes('.')) { alert('Please enter a valid email address.'); return; }
+                alert(`Thank you, ${name}! Your message has been sent. We'll get back to you within 24 hours. ✨`);
+                contactForm.reset();
+            });
+        }
 
         // ===== SMOOTH SCROLL =====
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -487,20 +489,34 @@
 
         // ===== SERVICE TABS =====
         const tabButtons = document.querySelectorAll('.service-tab-btn');
-        const panels = {
-            nails: document.getElementById('panel-nails'),
-            lashes: document.getElementById('panel-lashes'),
-            facials: document.getElementById('panel-facials')
-        };
+        const panelIds = ['panel-nails', 'panel-lashes', 'panel-facials'];
 
+        // Get all panels
+        const panels = {};
+        panelIds.forEach(id => {
+            panels[id] = document.getElementById(id);
+        });
+
+        // Ensure initial state: show nails, hide others
         tabButtons.forEach(btn => {
             btn.addEventListener('click', function() {
+                // 1. Remove active class from all tab buttons
                 tabButtons.forEach(b => b.classList.remove('active'));
-                Object.values(panels).forEach(p => p.classList.remove('active'));
+                // 2. Add active class to clicked button
                 this.classList.add('active');
+                
+                // 3. Hide all panels
+                Object.keys(panels).forEach(key => {
+                    if (panels[key]) {
+                        panels[key].classList.remove('active');
+                    }
+                });
+                
+                // 4. Show the panel corresponding to the clicked button
                 const service = this.dataset.service;
-                if (panels[service]) {
-                    panels[service].classList.add('active');
+                const panelId = 'panel-' + service;
+                if (panels[panelId]) {
+                    panels[panelId].classList.add('active');
                 }
             });
         });
