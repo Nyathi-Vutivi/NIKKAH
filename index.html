@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NIKKAH AESTHETICS — Luxury Spa</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+        body { font-family: 'Inter', sans-serif; background: #faf8f5; color: #3e2e26; line-height: 1.6; overflow-x: hidden; }
+        h1, h2, h3, h4 { font-family: 'Playfair Display', serif; font-weight: 600; letter-spacing: 0.02em; }
+        a { text-decoration: none; color: inherit; }
+        img { max-width: 100%; display: block; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        :root {
+            --nude-light: #f5ede7; --nude: #e8d5c4; --nude-medium: #d4b8a8; --nude-dark: #c4a492;
+            --brown-light: #a1887f; --brown: #8d6e63; --brown-dark: #6d4c41; --brown-deeper: #4e342e;
+            --white: #ffffff; --off-white: #faf8f5; --gold: #c9a88c;
+            --shadow: 0 8px 40px rgba(62, 46, 38, 0.08); --shadow-hover: 0 16px 60px rgba(62, 46, 38, 0.14);
+            --transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--nude-light); }
+        ::-webkit-scrollbar-thumb { background: var(--nude-medium); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--brown); }
+        .navbar { position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; padding: 18px 0; transition: var(--transition); background: transparent; }
+        .navbar.scrolled { background: rgba(255, 255, 255, 0.92); backdrop-filter: blur(14px); box-shadow: 0 2px 30px rgba(62, 46, 38, 0.06); padding: 12px 0; }
+        .navbar .container { display: flex; align-items: center; justify-content: space-between; }
+        .logo { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700; color: var(--brown-deeper); letter-spacing: 0.06em; position: relative; }
+        .logo span { color: var(--gold); }
+        .logo::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 40%; height: 2px; background: var(--gold); transition: width 0.4s ease; }
+        .logo:hover::after { width: 70%; }
+        .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
+        .nav-links a { font-size: 0.9rem; font-weight: 500; color: var(--brown-deeper); letter-spacing: 0.04em; position: relative; transition: color 0.3s ease; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.1em; }
+        .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: var(--gold); transition: width 0.3s ease; }
+        .nav-links a:hover { color: var(--brown); }
+        .nav-links a:hover::after { width: 100%; }
+        .nav-links a.active { color: var(--brown); }
+        .nav-links a.active::after { width: 100%; }
+        .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: transparent; border: none; }
+        .hamburger span { width: 28px; height: 2px; background: var(--brown-deeper); border-radius: 4px; transition: var(--transition); transform-origin: center; }
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        .hamburger.active span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+        .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, var(--nude-light) 0%, var(--nude) 50%, var(--nude-medium) 100%); position: relative; overflow: hidden; padding: 120px 0 80px; }
+        .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 20% 50%, rgba(255,255,255,0.3) 0%, transparent 60%), radial-gradient(circle at 80% 20%, rgba(255,255,255,0.15) 0%, transparent 50%), radial-gradient(circle at 60% 80%, rgba(201,168,140,0.15) 0%, transparent 50%); pointer-events: none; }
+        .hero .container { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; position: relative; z-index: 2; }
+        .hero-content { animation: fadeUp 1s ease forwards; }
+        .hero-content .badge { display: inline-block; background: rgba(255,255,255,0.5); backdrop-filter: blur(8px); padding: 6px 20px; border-radius: 50px; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.12em; color: var(--brown-dark); text-transform: uppercase; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.3); }
+        .hero-content h1 { font-size: 3.8rem; line-height: 1.1; color: var(--brown-deeper); margin-bottom: 16px; }
+        .hero-content h1 .highlight { color: var(--gold); font-style: italic; font-weight: 400; }
+        .hero-content p { font-size: 1.1rem; color: var(--brown); max-width: 480px; margin-bottom: 32px; font-weight: 300; line-height: 1.8; }
+        .hero-buttons { display: flex; gap: 16px; flex-wrap: wrap; }
+        .btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 36px; border-radius: 50px; font-weight: 500; font-size: 0.9rem; letter-spacing: 0.04em; transition: var(--transition); border: none; cursor: pointer; font-family: 'Inter', sans-serif; }
+        .btn-primary { background: var(--brown-deeper); color: var(--white); box-shadow: 0 4px 20px rgba(78,52,46,0.25); }
+        .btn-primary:hover { background: var(--brown-dark); transform: translateY(-3px); box-shadow: 0 8px 30px rgba(78,52,46,0.35); }
+        .btn-secondary { background: transparent; color: var(--brown-deeper); border: 2px solid var(--brown-deeper); }
+        .btn-secondary:hover { background: var(--brown-deeper); color: var(--white); transform: translateY(-3px); }
+        .btn-gold { background: var(--gold); color: var(--white); box-shadow: 0 4px 20px rgba(201,168,140,0.35); }
+        .btn-gold:hover { background: var(--brown); transform: translateY(-3px); box-shadow: 0 8px 30px rgba(201,168,140,0.45); }
+        .hero-image { display: flex; justify-content: center; align-items: center; animation: fadeUp 1s ease 0.2s forwards; opacity: 0; }
+        .hero-image .image-wrapper { width: 100%; max-width: 500px; aspect-ratio: 1/1.1; border-radius: 30px; background: linear-gradient(145deg, var(--nude-medium), var(--nude-dark)); position: relative; overflow: hidden; box-shadow: 0 30px 80px rgba(62,46,38,0.15); }
+        .hero-image .image-wrapper .placeholder-img { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 6rem; color: rgba(255,255,255,0.3); background: radial-gradient(circle at 30% 40%, var(--nude), var(--nude-dark)); }
+        .hero-image .image-wrapper .floating-icon { position: absolute; background: rgba(255,255,255,0.6); backdrop-filter: blur(10px); border-radius: 50%; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; color: var(--brown-dark); box-shadow: 0 8px 30px rgba(0,0,0,0.06); animation: float 4s ease-in-out infinite; }
+        .hero-image .image-wrapper .floating-icon:nth-child(2) { top: 12%; right: 8%; animation-delay: 0.5s; }
+        .hero-image .image-wrapper .floating-icon:nth-child(3) { bottom: 18%; left: 6%; animation-delay: 1.2s; }
+        .hero-image .image-wrapper .floating-icon:nth-child(4) { bottom: 10%; right: 12%; animation-delay: 2s; }
+        @keyframes float { 0%,100% { transform: translateY(0px); } 50% { transform: translateY(-12px); } }
+        @keyframes fadeUp { 0% { opacity: 0; transform: translateY(40px); } 100% { opacity: 1; transform: translateY(0); } }
+        .hero-wave { position: absolute; bottom: -2px; left: 0; width: 100%; height: 80px; background: var(--off-white); clip-path: ellipse(70% 100% at 50% 100%); z-index: 1; }
+        section { padding: 100px 0; position: relative; }
+        .section-label { display: inline-block; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; position: relative; padding-left: 40px; }
+        .section-label::before { content: ''; position: absolute; left: 0; top: 50%; width: 28px; height: 2px; background: var(--gold); transform: translateY(-50%); }
+        .section-title { font-size: 2.8rem; color: var(--brown-deeper); margin-bottom: 16px; }
+        .section-title span { color: var(--gold); font-style: italic; }
+        .section-subtitle { color: var(--brown); font-weight: 300; max-width: 560px; font-size: 1.05rem; line-height: 1.8; }
+        .section-header { margin-bottom: 56px; }
+        .section-header.centered { text-align: center; }
+        .section-header.centered .section-subtitle { margin: 0 auto; }
+        .section-header.centered .section-label { padding-left: 0; }
+        .section-header.centered .section-label::before { display: none; }
+        .about { background: var(--white); }
+        .about .container { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+        .about-image { border-radius: 24px; overflow: hidden; background: var(--nude-light); aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow); position: relative; }
+        .about-image img { width: 100%; height: 100%; object-fit: cover; }
+        .about-image .about-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(201,168,140,0.1), transparent); }
+        .about-content .about-features { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 28px; }
+        .about-features .feature-item { display: flex; align-items: center; gap: 12px; font-size: 0.95rem; color: var(--brown-dark); }
+        .about-features .feature-item i { color: var(--gold); font-size: 1.1rem; width: 24px; }
+        .services { background: var(--nude-light); }
+        .service-tabs { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-bottom: 40px; }
+        .service-tab-btn { padding: 14px 40px; border: none; border-radius: 60px; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 1rem; background: var(--white); color: var(--brown-dark); box-shadow: var(--shadow); cursor: pointer; transition: var(--transition); letter-spacing: 0.04em; }
+        .service-tab-btn:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+        .service-tab-btn.active { background: var(--brown-deeper); color: var(--white); box-shadow: 0 8px 30px rgba(78,52,46,0.3); }
+        .service-detail-panel { display: none; background: var(--white); border-radius: 28px; padding: 40px; box-shadow: var(--shadow); margin-top: 20px; }
+        .service-detail-panel.active { display: block; animation: fadeUp 0.5s ease; }
+        .service-detail-panel .panel-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+        .service-detail-panel .panel-img { border-radius: 20px; overflow: hidden; background: var(--nude-light); aspect-ratio: 4/3; }
+        .service-detail-panel .panel-img img { width: 100%; height: 100%; object-fit: cover; }
+        .service-detail-panel .panel-content h3 { font-size: 2rem; color: var(--brown-deeper); margin-bottom: 12px; }
+        .service-detail-panel .panel-content .price-list { list-style: none; margin-top: 20px; }
+        .service-detail-panel .panel-content .price-list li { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid rgba(0,0,0,0.04); font-weight: 400; color: var(--brown-dark); }
+        .service-detail-panel .panel-content .price-list li span { font-weight: 600; color: var(--brown-deeper); }
+        .gallery { background: var(--white); }
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .gallery-item { border-radius: 16px; overflow: hidden; aspect-ratio: 1/1; background: var(--nude-light); position: relative; cursor: pointer; box-shadow: var(--shadow); transition: var(--transition); }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: var(--transition); }
+        .gallery-item:hover img { transform: scale(1.04); }
+        .gallery-item .gallery-overlay { position: absolute; inset: 0; background: linear-gradient(0deg, rgba(78,52,46,0.5) 0%, transparent 60%); opacity: 0; transition: var(--transition); display: flex; align-items: flex-end; padding: 24px; }
+        .gallery-item:hover .gallery-overlay { opacity: 1; }
+        .gallery-overlay span { color: var(--white); font-weight: 500; font-size: 0.9rem; letter-spacing: 0.04em; }
+        .testimonials { background: var(--nude-light); }
+        .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        .testimonial-card { background: var(--white); padding: 32px 28px; border-radius: 20px; box-shadow: var(--shadow); transition: var(--transition); }
+        .testimonial-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-hover); }
+        .testimonial-card .stars { color: var(--gold); margin-bottom: 12px; font-size: 1rem; letter-spacing: 2px; }
+        .testimonial-card blockquote { font-size: 0.98rem; color: var(--brown-dark); font-weight: 300; line-height: 1.8; font-style: italic; margin-bottom: 16px; }
+        .testimonial-card .client { display: flex; align-items: center; gap: 12px; }
+        .testimonial-card .client .avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--nude); display: flex; align-items: center; justify-content: center; font-weight: 600; color: var(--brown-dark); font-size: 1.1rem; }
+        .testimonial-card .client .name { font-weight: 600; color: var(--brown-deeper); font-size: 0.95rem; }
+        .testimonial-card .client .title { font-size: 0.8rem; color: var(--brown-light); }
+        .contact { background: var(--white); }
+        .contact-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+        .contact-info h3 { font-size: 1.6rem; color: var(--brown-deeper); margin-bottom: 12px; }
+        .contact-info p { color: var(--brown); font-weight: 300; line-height: 1.8; margin-bottom: 28px; }
+        .contact-info .info-item { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; color: var(--brown-dark); }
+        .contact-info .info-item i { width: 40px; height: 40px; border-radius: 50%; background: var(--nude-light); display: flex; align-items: center; justify-content: center; color: var(--brown); font-size: 1rem; flex-shrink: 0; }
+        .contact-info .info-item span { font-weight: 400; }
+        .whatsapp-btn { display: inline-flex; align-items: center; gap: 12px; padding: 16px 40px; background: #25D366; color: white; border-radius: 50px; font-weight: 600; font-size: 1rem; box-shadow: 0 4px 20px rgba(37,211,102,0.3); transition: var(--transition); border: none; cursor: pointer; font-family: 'Inter', sans-serif; margin-top: 10px; }
+        .whatsapp-btn:hover { transform: translateY(-4px); box-shadow: 0 8px 35px rgba(37,211,102,0.4); background: #20b85a; }
+        .contact-form { background: var(--nude-light); padding: 40px 36px; border-radius: 24px; box-shadow: var(--shadow); }
+        .contact-form .form-group { margin-bottom: 20px; }
+        .contact-form label { display: block; font-size: 0.85rem; font-weight: 500; color: var(--brown-dark); margin-bottom: 6px; }
+        .contact-form input, .contact-form textarea { width: 100%; padding: 14px 18px; border: 1px solid rgba(255,255,255,0.4); border-radius: 12px; background: var(--white); font-family: 'Inter', sans-serif; font-size: 0.95rem; color: var(--brown-deeper); transition: var(--transition); outline: none; }
+        .contact-form input:focus, .contact-form textarea:focus { border-color: var(--gold); box-shadow: 0 0 0 4px rgba(201,168,140,0.15); }
+        .contact-form textarea { resize: vertical; min-height: 120px; }
+        .contact-form .btn-submit { width: 100%; padding: 16px; background: var(--brown-deeper); color: var(--white); border: none; border-radius: 50px; font-weight: 600; font-size: 1rem; cursor: pointer; transition: var(--transition); font-family: 'Inter', sans-serif; }
+        .contact-form .btn-submit:hover { background: var(--brown-dark); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(78,52,46,0.25); }
+        .footer { background: var(--brown-deeper); color: rgba(255,255,255,0.7); padding: 50px 0 30px; }
+        .footer .container { display: flex; flex-direction: column; align-items: center; text-align: center; }
+        .footer .logo { color: var(--white); font-size: 1.8rem; margin-bottom: 8px; }
+        .footer .logo::after { background: var(--gold); left: 50%; transform: translateX(-50%); width: 40px; }
+        .footer .logo:hover::after { width: 70px; }
+        .footer p { font-weight: 300; font-size: 0.9rem; max-width: 400px; margin: 4px auto 20px; }
+        .footer-socials { display: flex; gap: 16px; margin-bottom: 20px; }
+        .footer-socials a { width: 44px; height: 44px; border-radius: 50%; background: rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: center; color: var(--white); transition: var(--transition); font-size: 1.1rem; }
+        .footer-socials a:hover { background: var(--gold); transform: translateY(-4px); }
+        .footer-divider { width: 60px; height: 2px; background: rgba(255,255,255,0.1); margin: 8px auto 16px; }
+        .footer .copyright { font-size: 0.8rem; color: rgba(255,255,255,0.4); }
+        @media (max-width: 1024px) {
+            .hero .container { grid-template-columns: 1fr; text-align: center; }
+            .hero-content p { margin: 0 auto 32px; }
+            .hero-buttons { justify-content: center; }
+            .hero-image .image-wrapper { max-width: 400px; margin: 0 auto; }
+            .about .container { grid-template-columns: 1fr; text-align: center; }
+            .about .about-features { justify-items: center; }
+            .contact-wrapper { grid-template-columns: 1fr; }
+            .section-title { font-size: 2.2rem; }
+            .service-detail-panel .panel-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 768px) {
+            .nav-links { position: fixed; top: 0; right: -100%; width: 70%; max-width: 320px; height: 100vh; background: var(--white); flex-direction: column; justify-content: center; gap: 28px; padding: 40px; box-shadow: -10px 0 40px rgba(0,0,0,0.05); transition: var(--transition); z-index: 999; }
+            .nav-links.open { right: 0; }
+            .hamburger { display: flex; z-index: 1001; }
+            .hero-content h1 { font-size: 2.6rem; }
+            .hero-image .image-wrapper { max-width: 300px; }
+            .hero-image .image-wrapper .floating-icon { width: 44px; height: 44px; font-size: 1rem; }
+            .section-title { font-size: 1.8rem; }
+            .about-features { grid-template-columns: 1fr !important; }
+            .services-grid { grid-template-columns: 1fr 1fr; }
+            .gallery-grid { grid-template-columns: 1fr 1fr; }
+            .testimonials-grid { grid-template-columns: 1fr; }
+            .contact-form { padding: 28px 20px; }
+            .navbar .container { padding: 0 16px; }
+            .logo { font-size: 1.3rem; }
+            section { padding: 60px 0; }
+            .service-tabs { gap: 12px; }
+            .service-tab-btn { padding: 10px 24px; font-size: 0.9rem; }
+            .service-detail-panel { padding: 24px; }
+        }
+        @media (max-width: 480px) {
+            .services-grid { grid-template-columns: 1fr; }
+            .gallery-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+            .hero-content h1 { font-size: 2rem; }
+            .btn { padding: 12px 24px; font-size: 0.8rem; }
+            .whatsapp-btn { padding: 14px 28px; font-size: 0.9rem; width: 100%; justify-content: center; }
+            .contact-info .info-item { font-size: 0.9rem; }
+        }
+        .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+        .reveal-delay-4 { transition-delay: 0.4s; }
+        .reveal-delay-5 { transition-delay: 0.5s; }
+        .reveal-delay-6 { transition-delay: 0.6s; }
+    </style>
+</head>
+<body>
+    <!-- ===== NAVIGATION ===== -->
+    <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
+        <div class="container">
+            <a href="#home" class="logo">NIKKAH<span>AESTHETICS</span></a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#testimonials">Why Choose Us</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <span class="badge"><i class="fas fa-spa" style="margin-right:8px;"></i> Luxury Spa & Wellness</span>
+                <h1>Come visit us at <span class="highlight"><br>NIKKAH</span><br />AESTHETICS</h1>
+                <p>INDULGE IN THE ART OF SELF CARE WITH OUR LUXURIOUS SELF CARE SERVICES</p>
+                <div class="hero-buttons">
+                    <a href="#services" class="btn btn-primary">See our Services <i class="fas fa-arrow-right"></i></a>
+                    <a href="#contact" class="btn btn-secondary">Book Now</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="image-wrapper">
+                    <img src="spa9.jpg" alt="Spa stones" loading="lazy" style="width:100%;height:100%;object-fit:cover;" />
+                    <div class="floating-icon"><i class="fas fa-hand-sparkles"></i></div>
+                    <div class="floating-icon"><i class="fas fa-water"></i></div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-wave"></div>
+    </section>
+
+    <!-- ===== ABOUT ===== -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-image reveal">
+                <img src="spa10.jpg" alt="Poster" loading="lazy" />
+                <div class="about-overlay"></div>
+            </div>
+            <div class="about-content reveal">
+                <span class="section-label">About Us</span>
+                <h2 class="section-title">Where <span>Luxury</span> Meets <span>Serenity</span></h2>
+                <p style="color:var(--brown); font-weight:300; line-height:1.9; font-size:1.05rem;">
+                    At NIKKAH AESTHETICS, we believe that self-care is an essential part of a balanced life. Our journey began with a passion for beauty and wellness, and today we are proud to offer a sanctuary where every client is treated with the utmost care and attention.
+                </p>
+                <div class="about-features">
+                    <div class="feature-item"><i class="fas fa-check-circle"></i> Certified Therapists</div>
+                    <div class="feature-item"><i class="fas fa-check-circle"></i> Premium Products</div>
+                    <div class="feature-item"><i class="fas fa-check-circle"></i> Tailored Treatments</div>
+                    <div class="feature-item"><i class="fas fa-check-circle"></i> Relaxing Ambiance</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SERVICES ===== -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-header centered reveal">
+                <span class="section-label">Our Services</span>
+                <h2 class="section-title">Indulge in <span>Excellence</span></h2>
+                <p class="section-subtitle">Each treatment is designed to relax your body and calm your mind.</p>
+            </div>
+
+            <!-- Service Tabs (Buttons) -->
+            <div class="service-tabs">
+                <button class="service-tab-btn active" data-service="nails">💅 Nails</button>
+                <button class="service-tab-btn" data-service="lashes">👁️ Lashes</button>
+                <button class="service-tab-btn" data-service="facials">🧖 Facials</button>
+            </div>
+
+            <!-- Nails Panel -->
+            <div class="service-detail-panel active" id="panel-nails">
+                <div class="panel-grid">
+                    <div class="panel-img"><img src="spa5.jpg" alt="Nails" loading="lazy" /></div>
+                    <div class="panel-content">
+                        <h3>Nails</h3>
+                        <p style="color:var(--brown); font-weight:300;">Professional nail care with a variety of finishes to suit your style.</p>
+                        <ul class="price-list">
+                            <li><span>Plain Acrylic</span> <span>R250</span></li>
+                            <li><span>French Acrylic</span> <span>R300</span></li>
+                            <li><span>Gel Polish</span> <span>R350</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lashes Panel -->
+            <div class="service-detail-panel" id="panel-lashes">
+                <div class="panel-grid">
+                    <div class="panel-img"><img src="spa7.jpg" alt="Lashes" loading="lazy" /></div>
+                    <div class="panel-content">
+                        <h3>Lashes</h3>
+                        <p style="color:var(--brown); font-weight:300;">Enhance your eyes with our premium lash extensions and lifts.</p>
+                        <ul class="price-list">
+                            <li><span>Classic Set</span> <span>R140</span></li>
+                            <li><span>Hybrid Set</span> <span>R200</span></li>
+                            <li><span>Volume Set</span> <span>R280</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Facials Panel -->
+            <div class="service-detail-panel" id="panel-facials">
+                <div class="panel-grid">
+                    <div class="panel-img"><img src="spa6.jpg" alt="Facials" loading="lazy" /></div>
+                    <div class="panel-content">
+                        <h3>Facials</h3>
+                        <p style="color:var(--brown); font-weight:300;">Rejuvenating facial treatments tailored to your skin's needs.</p>
+                        <ul class="price-list">
+                            <li><span>Hydrating Facial</span> <span>R500</span></li>
+                            <li><span>Anti-Aging Facial</span> <span>R650</span></li>
+                            <li><span>Brightening Facial</span> <span>R550</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== GALLERY ===== -->
+    <section class="gallery" id="gallery">
+        <div class="container">
+            <div class="section-header centered">
+                <span class="section-label">Gallery</span>
+                <h2 class="section-title">Our <span>Work</span></h2>
+            </div>
+            <div class="gallery-grid">
+                <div class="gallery-item"><img src="spa4.jpg" alt="Spa stones" loading="lazy" /><div class="gallery-overlay"><span>Owner</span></div></div>
+                <div class="gallery-item"><img src="spa5.jpg" alt="Spa stones" loading="lazy" /><div class="gallery-overlay"><span>Owner</span></div></div>
+                <div class="gallery-item"><img src="spa6.jpg" alt="Spa stones" loading="lazy" /><div class="gallery-overlay"><span>Mask</span></div></div>
+                <div class="gallery-item"><img src="spa7.jpg" alt="Spa stones" loading="lazy" /><div class="gallery-overlay"><span>Suction</span></div></div>
+                <div class="gallery-item"><img src="spa8.jpg" alt="Spa stones" loading="lazy" /><div class="gallery-overlay"><span>Nails</span></div></div>
+                <div class="gallery-item"><img src="spa9.jpg" alt="Spa stones" loading="lazy" /><div class="gallery-overlay"><span>Logo</span></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== TESTIMONIALS ===== -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-header centered reveal">
+                <span class="section-label">Why Choose Us</span>
+                <h2 class="section-title">ELITE <span>CLINICAL</span> BRANDS</h2>
+                <p class="section-subtitle">WE USE ONLY BIOMEDICAL EMPORIUM & WORLD CLASS FORMULATIONS DELIVERING RESULTS YOU CAN SEE AND FEEL</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CONTACT ===== -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-header centered reveal">
+                <span class="section-label">Contact</span>
+                <h2 class="section-title">Get In <span>Touch</span></h2>
+                <p class="section-subtitle">We'd love to hear from you. Reach out to book your session or ask any questions.</p>
+            </div>
+            <div class="contact-wrapper">
+                <div class="contact-info reveal">
+                    <h3>Visit US ❤️</h3>
+                    <p>NIKKAH AESTHETICS is located in Giyani CBD next to Masingita Mall.</p>
+                    <div class="info-item"><i class="fas fa-map-pin"></i><span>Giyani CBD</span></div>
+                    <div class="info-item"><i class="fas fa-phone"></i><span>073 363 1359 <br> OR 063 179 6107</span></div>
+                    <div class="info-item"><i class="fas fa-envelope"></i><span>mlambomonicah@gmail.com</span></div>
+                    <div class="info-item"><i class="fas fa-clock"></i><span>Mon – Fri: 9:00 AM – 6:00 PM <br> Saturday: 9:00 am - 5:00 pm</span></div>
+                    <a href="https://wa.me/27733631359" target="_blank" class="whatsapp-btn"><i class="fab fa-whatsapp"></i> Chat with us</a>
+                </div>
+                <div class="contact-form reveal">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" placeholder="Your name" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" placeholder="you@example.com" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" placeholder="Tell us how we can help you..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn-submit">Send Message <i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="logo">NIKKAH<span>AESTHETICS</span></div>
+            <p>Luxury spa & wellness — where every visit is a journey to something wonderful.</p>
+            <div class="footer-socials">
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            </div>
+            <div class="footer-divider"></div>
+            <p class="copyright">&copy; 2026 NIKKAH AESTHETICS. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // ===== NAVBAR SCROLL =====
+        const navbar = document.getElementById('navbar');
+        const navLinks = document.getElementById('navLinks');
+        const hamburger = document.getElementById('hamburger');
+        const links = navLinks.querySelectorAll('a');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 60) navbar.classList.add('scrolled');
+            else navbar.classList.remove('scrolled');
+            updateActiveLink();
+        });
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('open');
+        });
+
+        links.forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('open');
+            });
+        });
+
+        function updateActiveLink() {
+            const sections = document.querySelectorAll('section[id]');
+            const scrollY = window.scrollY + 120;
+            sections.forEach(section => {
+                const top = section.offsetTop;
+                const height = section.offsetHeight;
+                const id = section.getAttribute('id');
+                if (scrollY >= top && scrollY < top + height) {
+                    links.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === `#${id}`) link.classList.add('active');
+                    });
+                }
+            });
+        }
+
+        // ===== REVEAL ON SCROLL =====
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+        }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // ===== CONTACT FORM =====
+        const contactForm = document.getElementById('contactForm');
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const message = document.getElementById('message').value.trim();
+            if (!name || !email || !message) { alert('Please fill in all fields.'); return; }
+            if (!email.includes('@') || !email.includes('.')) { alert('Please enter a valid email address.'); return; }
+            alert(`Thank you, ${name}! Your message has been sent. We'll get back to you within 24 hours. ✨`);
+            contactForm.reset();
+        });
+
+        // ===== SMOOTH SCROLL =====
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+            });
+        });
+
+        // ===== SERVICE TABS (BUTTONS) =====
+        const tabButtons = document.querySelectorAll('.service-tab-btn');
+        const panels = {
+            nails: document.getElementById('panel-nails'),
+            lashes: document.getElementById('panel-lashes'),
+            facials: document.getElementById('panel-facials')
+        };
+
+        tabButtons.forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Remove active class from all buttons and panels
+                tabButtons.forEach(b => b.classList.remove('active'));
+                Object.values(panels).forEach(p => p.classList.remove('active'));
+
+                // Add active class to clicked button
+                this.classList.add('active');
+
+                // Show corresponding panel
+                const service = this.dataset.service;
+                if (panels[service]) {
+                    panels[service].classList.add('active');
+                }
+            });
+        });
+
+        // ===== INIT =====
+        setTimeout(updateActiveLink, 100);
+        console.log('✨ NIKKAH AESTHETICS — Luxury Spa Website');
+    </script>
+</body>
+</html>
