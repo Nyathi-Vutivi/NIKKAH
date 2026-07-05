@@ -110,8 +110,23 @@
         .gallery { background: var(--white); }
         .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
         .gallery-item { border-radius: 16px; overflow: hidden; aspect-ratio: 1/1; background: var(--nude-light); position: relative; cursor: pointer; box-shadow: var(--shadow); transition: var(--transition); }
-        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: var(--transition); }
-        .gallery-item:hover img { transform: scale(1.04); }
+      
+        .gallery-item img,
+.gallery-item video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--transition);
+}
+
+
+
+.gallery-item:hover img,
+.gallery-item:hover video {
+    transform: scale(1.04);
+}
+
+        
         .gallery-item .gallery-overlay { position: absolute; inset: 0; background: linear-gradient(0deg, rgba(78,52,46,0.5) 0%, transparent 60%); opacity: 0; transition: var(--transition); display: flex; align-items: flex-end; padding: 24px; }
         .gallery-item:hover .gallery-overlay { opacity: 1; }
         .gallery-overlay span { color: var(--white); font-weight: 500; font-size: 0.9rem; letter-spacing: 0.04em; }
@@ -371,7 +386,61 @@
                  <div class="gallery-item"><img src="Spa14.jpeg" alt="Spa stones" loading="lazy" /><div class="gallery-overlay"><span>Our Work</span></div></div>
                  <div class="gallery-item"><img src="Spa15.jpeg" alt="Spa stones" loading="lazy" /><div class="gallery-overlay"><span>Our Work</span></div></div>
                  <div class="gallery-item"><img src="Spa16.jpeg" alt="Spa stones" loading="lazy" /><div class="gallery-overlay"><span>Our Work</span></div></div>
-                 <div class="gallery-item"><img src="Spa17.jpeg" alt="Spa stones" loading="lazy" /><div class="gallery-overlay"><span>Our Work</span></div></div>
+
+                .<div class="gallery-item">
+    <video controls>
+        <source src="Spa33.mp4" type="video/mp4">
+    </video>
+    <div class="gallery-overlay">
+        <span>Relaxing Massage</span>
+    </div>
+</div>
+                .<div class="gallery-item">
+    <video controls>
+        <source src="Spa34.mp4" type="video/mp4">
+    </video>
+    <div class="gallery-overlay">
+        <span>Relaxing Massage</span>
+    </div>
+</div>
+                
+                
+
+                .<div class="gallery-item">
+    <video controls>
+        <source src="Spa35.mp4" type="video/mp4">
+    </video>
+    <div class="gallery-overlay">
+        <span>Relaxing Massage</span>
+    </div>
+</div>
+                
+                
+.<div class="gallery-item">
+    <video controls>
+        <source src="Spa36.mp4" type="video/mp4">
+    </video>
+    <div class="gallery-overlay">
+        <span>Relaxing Massage</span>
+    </div>
+</div>
+
+                <div class="gallery-item"><img src="Spa18.jpeg" alt="Spa stones" loading="lazy" /><div class="gallery-overlay"><span>Our Work</span></div></div>
+                <div class="gallery-item"><img src="Spa19.jpeg" alt="Spa stones" loading="lazy" /><div class="gallery-overlay"><span>Our Work</span></div></div>
+                <div class="gallery-item"><img src="Spa20.jpeg" alt="Spa stones" loading="lazy" /><div class="gallery-overlay"><span>Our Work</span></div></div>
+                <div class="gallery-item"><img src="Spa21.jpeg" alt="Spa stones" loading="lazy" /><div class="gallery-overlay"><span>Our Work</span></div></div>
+                <div class="gallery-item"><img src="Spa22.jpeg" alt="Spa stones" loading="lazy" /><div class="gallery-overlay"><span>Our Work</span></div></div>
+                <div class="gallery-item"><img src="Spa23.jpeg" alt="Spa stones" loading="lazy" /><div class="gallery-overlay"><span>Our Work</span></div></div>
+                <div class="gallery-item"><img src="Spa24.jpeg" alt="Spa stones" loading="lazy" /><div class="gallery-overlay"><span>Our Work</span></div></div>
+                <div class="gallery-item"><img src="Spa25.jpeg" alt="Spa stones" loading="lazy" /><div class="gallery-overlay"><span>Our Work</span></div></div>
+                <div class="gallery-item"><img src="Spa26.jpeg" alt="Spa stones" loading="lazy" /><div class="gallery-overlay"><span>Our Work</span></div></div>
+                <div class="gallery-item"><img src="Spa27.jpeg" alt="Spa stones" loading="lazy" /><div class="gallery-overlay"><span>Our Work</span></div></div>
+                <div class="gallery-item"><img src="Spa28.jpeg" alt="Spa stones" loading="lazy" /><div class="gallery-overlay"><span>Our Work</span></div></div>
+                <div class="gallery-item"><img src="Spa29.jpeg" alt="Spa stones" loading="lazy" /><div class="gallery-overlay"><span>Our Work</span></div></div>
+                <div class="gallery-item"><img src="Spa30.jpeg" alt="Spa stones" loading="lazy" /><div class="gallery-overlay"><span>Our Work</span></div></div>
+                <div class="gallery-item"><img src="Spa31.jpeg" alt="Spa stones" loading="lazy" /><div class="gallery-overlay"><span>Our Work</span></div></div>
+                 
+                <div class="gallery-item"><img src="Spa17.jpeg" alt="Spa stones" loading="lazy" /><div class="gallery-overlay"><span>Our Work</span></div></div>
             </div>
         </div>
     </section>
